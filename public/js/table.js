@@ -86,11 +86,47 @@ var Table = (function () {
     // Offer Date
     tr.appendChild(createTextTd(formatDate(prop.offer_date)));
 
-    // Seller Response badge
+    // Seller Response badge (clickable for inline editing)
     var tdStatus = document.createElement("td");
     var badge = document.createElement("span");
-    badge.className = "status-badge " + statusClass(prop.seller_response);
+    badge.className = "status-badge status-editable " + statusClass(prop.seller_response);
     badge.textContent = prop.seller_response || "none";
+    badge.setAttribute("title", "Click to update");
+    (function (badge, prop) {
+      badge.addEventListener("click", function () {
+        var currentValue = prop.seller_response || "";
+        var input = document.createElement("input");
+        input.type = "text";
+        input.value = currentValue;
+        input.className = "status-inline-input";
+        input.placeholder = "e.g. checking, closed, accepted";
+        badge.replaceWith(input);
+        input.focus();
+        input.select();
+
+        var committed = false;
+        function commitChange() {
+          if (committed) return;
+          committed = true;
+          Api.updateProperty(prop.id, { sellerResponse: input.value.trim() }).then(function () {
+            Table.render();
+          });
+        }
+
+        input.addEventListener("blur", commitChange);
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            input.removeEventListener("blur", commitChange);
+            commitChange();
+          } else if (e.key === "Escape") {
+            e.preventDefault();
+            input.removeEventListener("blur", commitChange);
+            Table.render();
+          }
+        });
+      });
+    })(badge, prop);
     tdStatus.appendChild(badge);
     tr.appendChild(tdStatus);
 

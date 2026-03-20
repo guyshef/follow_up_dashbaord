@@ -384,3 +384,21 @@ header h1 {
   gap: 8px;
   margin-top: 16px;
 }
+
+/* Inline edit */
+.status-editable { cursor: pointer; }
+.status-editable:hover { outline: 2px dashed #2563eb; outline-offset: 2px; }
+
+.status-inline-input {
+  padding: 3px 8px;
+  border: 2px solid #2563eb;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  width: 160px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .prop-table { display: block; overflow-x: auto; }
+  .fu-form-row { flex-direction: column; }
+}
