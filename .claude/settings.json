@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /data/projects/follow_up -maxdepth 2 -name README* -o -name .cursorrules -o -name copilot*)",
+      "Bash(chmod +x /data/projects/follow_up/follow_up_start.sh /data/projects/follow_up/follow_up_stop.sh)",
+      "Bash(npm rebuild:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/local/n/versions/node/**)",
+      "Bash(~/.nvm/versions/node/v20.20.1/bin/npm rebuild:*)",
+      "Bash(NODE20=~/.nvm/versions/node/v20.20.1/bin/node)",
+      "Bash(NPM20=~/.nvm/versions/node/v20.20.1/bin/npm)",
+      "Bash($NODE20 --version)",
+      "Bash($NPM20 --version)",
+      "Bash(NPM20=~/.nvm/versions/node/v20.20.1/lib/node_modules/npm/bin/npm-cli.js)",
+      "Bash($NODE20 $NPM20 rebuild better-sqlite3)",
+      "Bash(PATH=~/.nvm/versions/node/v20.20.1/bin:$PATH node --version)",
+      "Bash(PATH=~/.nvm/versions/node/v20.20.1/bin:$PATH npm rebuild better-sqlite3)",
+      "Bash(./follow_up_start.sh)"
+    ]
+  }
+}
